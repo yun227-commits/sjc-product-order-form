@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 주문서</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+        }
+        .order-form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-form">
+        <h1>상품 주문서</h1>
+        <form onsubmit="saveOrderData(); return false;">
+            <!-- 고객 정보 -->
+            <label for="customerName">이름</label>
+            <input type="text" id="customerName" name="customerName" placeholder="이름을 입력하세요" required>
+
+            <label for="customerEmail">이메일</label>
+            <input type="email" id="customerEmail" name="customerEmail" placeholder="example@domain.com" required>
+
+            <label for="customerPhone">전화번호</label>
+            <input type="tel" id="customerPhone" name="customerPhone" placeholder="010-1234-5678" required>
+
+            <!-- 상품 선택 -->
+            <label for="product">상품 선택</label>
+            <select id="product" name="product" required>
+                <option value="">상품을 선택하세요</option>
+                <option value="product1">상품 1</option>
+                <option value="product2">상품 2</option>
+                <option value="product3">상품 3</option>
+            </select>
+
+            <label for="quantity">수량</label>
+            <input type="number" id="quantity" name="quantity" min="1" placeholder="수량을 입력하세요" required>
+
+            <button type="submit">다음 단계로</button>
+        </form>
+    </div>
+
+    <script>
+        function saveOrderData() {
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const phone = document.getElementById('customerPhone').value;
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+
+            // 로컬 스토리지에 데이터 저장
+            localStorage.setItem('customerName', name);
+            localStorage.setItem('customerEmail', email);
+            localStorage.setItem('customerPhone', phone);
+            localStorage.setItem('product', product);
+            localStorage.setItem('quantity', quantity);
+
+            // 배송지 입력 페이지로 이동
+            window.location.href = "shipping-form.html";
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배송지 입력</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+        }
+        .shipping-form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="shipping-form">
+        <h1>배송지 입력</h1>
+        <form onsubmit="saveShippingData(); return false;">
+            <label for="address">주소</label>
+            <input type="text" id="address" name="address" placeholder="주소를 입력하세요" required>
+
+            <label for="zipCode">우편번호</label>
+            <input type="text" id="zipCode" name="zipCode" placeholder="우편번호를 입력하세요" required>
+
+            <button type="submit">결제 단계로</button>
+        </form>
+    </div>
+
+    <script>
+        function saveShippingData() {
+            const address = document.getElementById('address').value;
+            const zipCode = document.getElementById('zipCode').value;
+
+            // 로컬 스토리지에 배송지 데이터 저장
+            localStorage.setItem('address', address);
+            localStorage.setItem('zipCode', zipCode);
+
+            // 결제 페이지로 이동
+            window.location.href = "payment-form.html";
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 정보</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+        }
+        .payment-form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-form">
+        <h1>결제 정보</h1>
+        <form onsubmit="submitPayment(); return false;">
+            <label for="cardNumber">카드 번호</label>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="카드 번호를 입력하세요" required>
+
+            <label for="expiryDate">유효기간</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv" placeholder="CVV 번호를 입력하세요" required>
+
+            <button type="submit">결제 완료</button>
+        </form>
+    </div>
+
+    <script>
+        function submitPayment() {
+            alert("결제가 완료되었습니다!");
+            localStorage.clear(); // 데이터 초기화
+            window.location.href = "thank-you.html";
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 완료</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+        .thank-you {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you">
+        <h1>결제가 완료되었습니다!</h1>
+        <p>주문해 주셔서 감사합니다. 상품이 빠른 시일 내에 배송될 예정입니다.</p>
+        <a href="order-form.html">다시 주문하기</a>
+    </div>
+</body>
+</html>
